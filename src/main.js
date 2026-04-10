@@ -54,11 +54,40 @@ function validateData(questions, dimensions, types, config) {
 function showInitError(message) {
   const intro = document.getElementById('page-intro')
   const startBtn = document.getElementById('btn-start')
-  const note = intro?.querySelector('.intro-note')
+  const note = document.getElementById('intro-note') || intro?.querySelector('.intro-note')
 
   if (startBtn) startBtn.disabled = true
   if (note) {
     note.textContent = `数据加载失败：${message}`
+  }
+}
+
+function applyDisplayConfig(config) {
+  const display = config?.display || {}
+  const title = display.title || '人格测试'
+  const subtitle = display.subtitle || ''
+  const author = display.author || ''
+  const note = display.funNote || ''
+
+  document.title = title
+
+  const metaDescription = document.querySelector('meta[name="description"]')
+  if (metaDescription) {
+    metaDescription.setAttribute('content', subtitle || title)
+  }
+
+  const introTitle = document.getElementById('intro-title')
+  const introCredit = document.getElementById('intro-credit')
+  const introNote = document.getElementById('intro-note')
+
+  if (introTitle) {
+    introTitle.innerHTML = subtitle ? `${title}<br/>${subtitle}` : title
+  }
+  if (introCredit) {
+    introCredit.textContent = author
+  }
+  if (introNote) {
+    introNote.textContent = note
   }
 }
 
@@ -72,6 +101,7 @@ async function init() {
     ])
 
     validateData(questions, dimensions, types, config)
+    applyDisplayConfig(config)
 
     const pages = {
       intro: document.getElementById('page-intro'),

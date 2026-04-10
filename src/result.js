@@ -71,7 +71,7 @@ export function renderResult(result, userLevels, dimOrder, dimDefs, config) {
   })
 
   // 免责声明
-  document.getElementById('disclaimer').textContent = config.display.funNote
+  document.getElementById('disclaimer').textContent = config.display.funNote || ''
 
   // 下载分享图
   const btnDownload = document.getElementById('btn-download')
