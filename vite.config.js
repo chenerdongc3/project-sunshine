@@ -1,8 +1,7 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  // base: '/SBTIYABI/',
-  base: './', 
+  base: '/project-sunshine/',
   publicDir: 'asset',
   build: {
     outDir: 'dist',
