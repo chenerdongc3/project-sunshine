@@ -19,6 +19,7 @@ export async function generateShareImage(primary, userLevels, dimOrder, dimDefs,
   canvas.height = H * dpr
   const ctx = canvas.getContext('2d')
   ctx.scale(dpr, dpr)
+  const primaryImage = primary.image || primary.imageUrl || primary.image_url || ''
 
   // 背景
   ctx.fillStyle = '#f0f4f1'
@@ -51,6 +52,19 @@ export async function generateShareImage(primary, userLevels, dimOrder, dimDefs,
   ctx.fillStyle = '#2c3e2d'
   ctx.fillText(primary.cn, W / 2, y)
   y += 36
+
+  if (primaryImage) {
+    try {
+      const image = await loadCanvasImage(primaryImage)
+      const imageSize = 200
+      const imageX = (W - imageSize) / 2
+      const imageY = y
+      drawCoverImage(ctx, image, imageX, imageY, imageSize, imageSize, 2)
+      y += imageSize + 20
+    } catch (error) {
+      console.warn('Failed to load share image:', primaryImage, error)
+    }
+  }
 
   // 匹配度徽章
   const badgeText = `匹配度 ${primary.similarity}%` + (primary.exact != null ? ` · 精准命中 ${primary.exact}/${totalDims} 维` : '')
@@ -249,4 +263,29 @@ function wrapText(ctx, text, maxWidth) {
   }
   if (line) lines.push(line)
   return lines
+}
+
+function loadCanvasImage(src) {
+  return new Promise((resolve, reject) => {
+    const image = new Image()
+    image.onload = () => resolve(image)
+    image.onerror = reject
+    image.src = src
+  })
+}
+
+function drawCoverImage(ctx, image, x, y, width, height, radius = 0) {
+  const scale = Math.max(width / image.width, height / image.height)
+  const drawWidth = image.width * scale
+  const drawHeight = image.height * scale
+  const drawX = x + (width - drawWidth) / 2
+  const drawY = y + (height - drawHeight) / 2
+
+  ctx.save()
+  if (radius > 0) {
+    roundRect(ctx, x, y, width, height, radius)
+    ctx.clip()
+  }
+  ctx.drawImage(image, drawX, drawY, drawWidth, drawHeight)
+  ctx.restore()
 }

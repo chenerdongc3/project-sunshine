@@ -10,6 +10,7 @@ const LEVEL_CLASS = { L: 'level-low', M: 'level-mid', H: 'level-high' }
 export function renderResult(result, userLevels, dimOrder, dimDefs, config) {
   const { primary, rankings, mode } = result
   const totalDims = dimOrder.length
+  const primaryImage = primary.image || primary.imageUrl || primary.image_url || ''
 
   // Kicker
   const kicker = document.getElementById('result-kicker')
@@ -18,6 +19,18 @@ export function renderResult(result, userLevels, dimOrder, dimDefs, config) {
   // 主类型
   document.getElementById('result-code').textContent = primary.code
   document.getElementById('result-name').textContent = primary.cn
+
+  const resultImageWrap = document.getElementById('result-image-wrap')
+  const resultImage = document.getElementById('result-image')
+  if (primaryImage) {
+    resultImageWrap.style.display = ''
+    resultImage.src = primaryImage
+    resultImage.alt = `${primary.cn} image`
+  } else {
+    resultImageWrap.style.display = 'none'
+    resultImage.removeAttribute('src')
+    resultImage.alt = ''
+  }
 
   // 匹配度
   document.getElementById('result-badge').textContent =
