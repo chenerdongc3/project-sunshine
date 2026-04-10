@@ -1,17 +1,12 @@
-import { shuffle, insertAtRandom, insertAfter } from './utils.js'
+import { shuffle } from './utils.js'
 
 /**
  * 答题控制器
  */
-export function createQuiz(questions, config, onComplete) {
-  const mainQuestions = shuffle(questions.main)
-  const drinkGateQ1 = questions.special.find((q) => q.id === config.drinkGate.questionId)
-  const drinkGateQ2 = questions.special.find((q) => q.id === 'drink_gate_q2')
-
-  let queue = insertAtRandom(mainQuestions, drinkGateQ1)
+export function createQuiz(questions, onComplete) {
+  let queue = shuffle(questions.main)
   let current = 0
   let answers = {}
-  let isDrunk = false
 
   const els = {
     fill: document.getElementById('progress-fill'),
@@ -49,19 +44,9 @@ export function createQuiz(questions, config, onComplete) {
   function selectOption(question, option) {
     answers[question.id] = option.value
 
-    // 酒鬼门：如果选了"饮酒"，插入追问
-    if (question.id === config.drinkGate.questionId && option.value === config.drinkGate.triggerValue) {
-      queue = insertAfter(queue, question.id, drinkGateQ2)
-    }
-
-    // 酒鬼检测
-    if (question.id === 'drink_gate_q2' && option.value === config.drinkGate.drunkTriggerValue) {
-      isDrunk = true
-    }
-
     current++
     if (current >= totalCount()) {
-      onComplete(answers, isDrunk)
+      onComplete(answers)
     } else {
       renderQuestion()
     }
@@ -70,8 +55,7 @@ export function createQuiz(questions, config, onComplete) {
   function start() {
     current = 0
     answers = {}
-    isDrunk = false
-    queue = insertAtRandom(shuffle(questions.main), drinkGateQ1)
+    queue = shuffle(questions.main)
     renderQuestion()
   }
 
