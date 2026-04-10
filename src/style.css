@@ -121,9 +121,11 @@ body {
   box-shadow: 0 12px 28px rgba(76, 103, 82, 0.24);
 }
 
-.btn-start:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 18px 36px rgba(76, 103, 82, 0.3);
+@media (hover: hover) and (pointer: fine) {
+  .btn-start:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 18px 36px rgba(76, 103, 82, 0.3);
+  }
 }
 
 .btn-start:active {
@@ -131,9 +133,11 @@ body {
   box-shadow: 0 8px 18px rgba(76, 103, 82, 0.2);
 }
 
-.btn-primary:hover {
-  background: var(--accent-hover);
-  transform: translateY(-1px);
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
 }
 
 .btn-primary:active {
@@ -146,8 +150,10 @@ body {
   padding: 12px 36px;
 }
 
-.btn-secondary:hover {
-  background: var(--border);
+@media (hover: hover) and (pointer: fine) {
+  .btn-secondary:hover {
+    background: var(--border);
+  }
 }
 
 .btn-option {
@@ -163,17 +169,41 @@ body {
   font-size: 0.95rem;
   font-weight: 400;
   line-height: 1.5;
+  transition: transform 0.12s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.btn-option:hover {
-  border-color: var(--accent);
-  background: var(--accent-light);
+@media (hover: hover) and (pointer: fine) {
+  .btn-option:hover {
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
 }
 
 .btn-option:active {
   background: var(--accent);
   color: #fff;
   border-color: var(--accent);
+  transform: scale(0.985);
+}
+
+.btn-option:focus {
+  outline: none;
+}
+
+.btn-option:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(76, 103, 82, 0.18);
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .btn-option {
+    touch-action: manipulation;
+  }
+
+  .btn-option:active {
+    box-shadow: 0 8px 18px rgba(76, 103, 82, 0.14);
+  }
 }
 
 /* ========== Quiz ========== */

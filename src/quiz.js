@@ -42,6 +42,10 @@ export function createQuiz(questions, onComplete) {
   }
 
   function selectOption(question, option) {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur()
+    }
+
     answers[question.id] = option.value
 
     current++
