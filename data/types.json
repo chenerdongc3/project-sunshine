@@ -6,7 +6,7 @@
       "cn": "精致金融男",
       "intro": "我们要不要找个时间聊聊宏观经济？",
       "desc": "西装革履下藏着对P/E Ratio的执念，其实最关心的是今晚能不能不加班。",
-      "image": "asset/finance-man/微信图片_20260411004252_99_485_r1_c1.jpg"
+      "image": "/asset/finance-man/微信图片_20260411004252_99_485_r1_c1.jpg"
     },
     {
       "code": "alpha-bourgeois",
@@ -14,7 +14,7 @@
       "cn": "小布尔乔亚alpha男",
       "intro": "这杯手冲的豆子，风味还算平衡。",
       "desc": "在精致咖啡馆里谈论存在主义，本质是追求一种不费力气的优越感。",
-      "image": "asset/alpha-bourgeois/微信图片_20260411004252_99_485_r1_c2.jpg"
+      "image": "/asset/alpha-bourgeois/微信图片_20260411004252_99_485_r1_c2.jpg"
     },
     {
       "code": "it-giant",
@@ -22,7 +22,7 @@
       "cn": "大厂互联网男",
       "intro": "这个需求的底层逻辑是什么？",
       "desc": "格子衬衫里包裹着随时准备‘赋能’的心，但颈椎病可能先于财务自由到来。",
-      "image": "asset/it-giant/微信图片_20260411004252_99_485_r1_c3.jpg"
+      "image": "/asset/it-giant/微信图片_20260411004252_99_485_r1_c3.jpg"
     },
     {
       "code": "overseas-dropout",
@@ -30,7 +30,7 @@
       "cn": "归国无社交留子",
       "intro": "其实伦敦的雨也没那么让人讨厌。",
       "desc": "拿着名校文凭回国，却发现除了外卖软件，最怀念的是深夜的图书馆。",
-      "image": "asset/overseas-dropout/微信图片_20260411004252_99_485_r1_c4.jpg"
+      "image": "/asset/overseas-dropout/微信图片_20260411004252_99_485_r1_c4.jpg"
     },
     {
       "code": "gym-bro",
@@ -38,7 +38,7 @@
       "cn": "味觉失灵自律哥",
       "intro": "这顿饭，碳水超标了吧？",
       "desc": "水煮鸡胸肉是唯一的信仰，在他的世界里，汗水比任何语言都有力量。",
-      "image": "asset/gym-bro/微信图片_20260411004252_99_485_r2_c1.jpg"
+      "image": "/asset/gym-bro/微信图片_20260411004252_99_485_r2_c1.jpg"
     },
     {
       "code": "fragile-longhair",
@@ -46,7 +46,7 @@
       "cn": "易碎长发男",
       "intro": "你听过这种频率的蝉鸣吗？",
       "desc": "点燃一支烟并不是为了尼古丁，而是为了那抹在忧郁中逐渐消散的艺术感。",
-      "image": "asset/fragile-longhair/微信图片_20260411004252_99_485_r2_c2.jpg"
+      "image": "/asset/fragile-longhair/微信图片_20260411004252_99_485_r2_c2.jpg"
     },
     {
       "code": "military-blogger",
@@ -54,7 +54,7 @@
       "cn": "大冰子弟军博主",
       "intro": "如果这波行情稳住，我能换台坦克。",
       "desc": "在数字世界里指点江山，机能风外套下是对宏大叙事的极度痴迷。",
-      "image": "asset/military-blogger/微信图片_20260411004252_99_485_r2_c3.jpg"
+      "image": "/asset/military-blogger/微信图片_20260411004252_99_485_r2_c3.jpg"
     },
     {
       "code": "civil-servant",
@@ -62,7 +62,7 @@
       "cn": "上岸行政夹克男",
       "intro": "这件事，还是要看文件怎么说。",
       "desc": "体制内的沉稳是他的保护色，那件深蓝夹克里装满了为人民服务的觉悟。",
-      "image": "asset/civil-servant/微信图片_20260411004252_99_485_r2_c4.jpg"
+      "image": "/asset/civil-servant/微信图片_20260411004252_99_485_r2_c4.jpg"
     },
     {
       "code": "otaku-nerd",
@@ -70,7 +70,7 @@
       "cn": "社畜老二次元男",
       "intro": "老婆是纸做的，但爱是真的。",
       "desc": "白天的PPT是生活的假象，晚上的番剧和纸片人才是灵魂的归宿。",
-      "image": "asset/otaku-nerd/微信图片_20260411004252_99_485_r3_c1.jpg"
+      "image": "/asset/otaku-nerd/微信图片_20260411004252_99_485_r3_c1.jpg"
     },
     {
       "code": "rock-girl",
@@ -78,7 +78,7 @@
       "cn": "地球曲库滚男/女",
       "intro": "你还在听排行榜上的流行歌？",
       "desc": "耳机里循环着小众乐团，在这个平庸的世界里，她是唯一的摇滚反叛者。",
-      "image": "asset/rock-girl/微信图片_20260411004252_99_485_r3_c2.jpg"
+      "image": "/asset/rock-girl/微信图片_20260411004252_99_485_r3_c2.jpg"
     },
     {
       "code": "visual-kei",
@@ -86,7 +86,7 @@
       "cn": "本土视觉系男",
       "intro": "黑夜才是我最真实的颜色。",
       "desc": "用最浓的眼影和最黑的长袍，在这个快节奏的都市里构建自己的哥特梦。",
-      "image": "asset/visual-kei/微信图片_20260411004252_99_485_r3_c3.jpg"
+      "image": "/asset/visual-kei/微信图片_20260411004252_99_485_r3_c3.jpg"
     },
     {
       "code": "taoist-practitioner",
@@ -94,7 +94,7 @@
       "cn": "道系散修小生",
       "intro": "命里有时终须有，没有我就睡了。",
       "desc": "与其在内卷中沉沦，不如在山水间躺平，清心寡欲是他对抗世界的武器。",
-      "image": "asset/taoist-practitioner/微信图片_20260411004252_99_485_r3_c4.jpg"
+      "image": "/asset/taoist-practitioner/微信图片_20260411004252_99_485_r3_c4.jpg"
     },
     {
       "code": "emo-girl-pink",
@@ -102,7 +102,7 @@
       "cn": "阴湿滴泪妹",
       "intro": "反正最后大家都会消失的吧……",
       "desc": "甜美的双马尾下是破碎的心，她最擅长在社交平台上发布只有深夜才懂的文字。",
-      "image": "asset/emo-girl-pink/微信图片_20260411004252_99_485_r4_c1.jpg"
+      "image": "/asset/emo-girl-pink/微信图片_20260411004252_99_485_r4_c1.jpg"
     },
     {
       "code": "working-beast",
@@ -110,7 +110,7 @@
       "cn": "活人微死牛马",
       "intro": "只要我不抬头，老板就看不见我。",
       "desc": "每一个清晨的闹钟都是对灵魂的鞭笞，她在名为‘公司’的工厂里默默透支青春。",
-      "image": "asset/working-beast/微信图片_20260411004252_99_485_r4_c2.jpg"
+      "image": "/asset/working-beast/微信图片_20260411004252_99_485_r4_c2.jpg"
     },
     {
       "code": "alcohol-study-abroad",
@@ -118,7 +118,7 @@
       "cn": "酒精计划小留",
       "intro": "今晚去哪桌？我自带了野格。",
       "desc": "半个灵魂在课堂，半个灵魂在夜店，她是留学圈里永远不愿清醒的派对动物。",
-      "image": "asset/alcohol-study-abroad/微信图片_20260411004252_99_485_r4_c3.jpg"
+      "image": "/asset/alcohol-study-abroad/微信图片_20260411004252_99_485_r4_c3.jpg"
     },
     {
       "code": "networking-queen",
@@ -126,7 +126,7 @@
       "cn": "人脉西xuan姐",
       "intro": "我有你微信吧？回头拉你进个群。",
       "desc": "手机里躺着五千个好友，她的成功不在于做了什么，而在于她认识谁。",
-      "image": "asset/networking-queen/微信图片_20260411004252_99_485_r4_c4.jpg"
+      "image": "/asset/networking-queen/微信图片_20260411004252_99_485_r4_c4.jpg"
     },
     {
       "code": "simp-puppy",
@@ -134,7 +134,7 @@
       "cn": "唯爱姐的小狗",
       "intro": "姐姐，你今天发朋友圈的样子真好看。",
       "desc": "只要能换来姐姐的一点关注，做一只乖巧听话的‘舔狗’也是至高荣誉。",
-      "image": "asset/simp-puppy/微信图片_20260411004252_99_485_r5_c1.jpg"
+      "image": "/asset/simp-puppy/微信图片_20260411004252_99_485_r5_c1.jpg"
     },
     {
       "code": "urban-elite",
@@ -142,7 +142,7 @@
       "cn": "精致都市隶人",
       "intro": "我的生活，只允许出现在滤镜里。",
       "desc": "背着最贵的包，挤着最挤的地铁，她是写字楼里最高级的装饰品。",
-      "image": "asset/urban-elite/微信图片_20260411004252_99_485_r5_c2.jpg"
+      "image": "/asset/urban-elite/微信图片_20260411004252_99_485_r5_c2.jpg"
     },
     {
       "code": "k-pop-fan",
@@ -150,7 +150,7 @@
       "cn": "高能量韩娱妹",
       "intro": "哪怕天塌了，也不能耽误我打榜！",
       "desc": "为爱豆打榜时拥有无穷能量，哪怕不眠不休，也是最热血的追星战士。",
-      "image": "asset/k-pop-fan/微信图片_20260411004252_99_485_r5_c3.jpg"
+      "image": "/asset/k-pop-fan/微信图片_20260411004252_99_485_r5_c3.jpg"
     },
     {
       "code": "hermit-geek",
@@ -158,7 +158,7 @@
       "cn": "避世阿宅",
       "intro": "没外卖的话，我可以一个月不出门。",
       "desc": "三次元的阳光过于刺眼，只有在封闭的房间里，她才能找到绝对的安全感。",
-      "image": "asset/hermit-geek/微信图片_20260411004252_99_485_r5_c4.jpg"
+      "image": "/asset/hermit-geek/微信图片_20260411004252_99_485_r5_c4.jpg"
     },
     {
       "code": "mass-produced-sub",
@@ -190,7 +190,7 @@
       "cn": "学杂了的人脉姐",
       "intro": "根据博弈论，我们现在应该交换联系方式。",
       "desc": "试图用各种时髦的理论武装社交，却在虚伪的人际往来中迷失了真我。",
-      "image": "asset/social-butterfly/微信图片_20260411004252_99_485_r5_c2.jpg"
+      "image": "/asset/social-butterfly/微信图片_20260411004252_99_485_r5_c2.jpg"
     },
     {
       "code": "mystic-shaman",
@@ -206,7 +206,7 @@
       "cn": "地下Rapper男",
       "intro": "别问我的真名，叫我Lil’ Bro就行。",
       "desc": "在廉价出租屋里押韵，总觉得全世界都欠他一个直通总决赛的名额。",
-      "image": "asset/underground-rapper/微信图片_20260411004252_99_485_r3_c2.jpg"
+      "image": "/asset/underground-rapper/微信图片_20260411004252_99_485_r3_c2.jpg"
     },
     {
       "code": "coffee-addict",
