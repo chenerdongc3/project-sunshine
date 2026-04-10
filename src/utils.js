@@ -14,6 +14,7 @@ export function shuffle(arr) {
  * 在数组的随机位置插入元素
  */
 export function insertAtRandom(arr, item) {
+  if (!item) return [...arr]
   const a = [...arr]
   const idx = Math.floor(Math.random() * (a.length + 1))
   a.splice(idx, 0, item)
@@ -24,6 +25,7 @@ export function insertAtRandom(arr, item) {
  * 在指定元素后面插入新元素
  */
 export function insertAfter(arr, afterId, item) {
+  if (!item) return [...arr]
   const a = [...arr]
   const idx = a.findIndex((q) => q.id === afterId)
   if (idx >= 0) a.splice(idx + 1, 0, item)

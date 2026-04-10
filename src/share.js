@@ -8,15 +8,18 @@ const LEVEL_LABEL = { L: '低', M: '中', H: '高' }
 /**
  * 生成分享卡片并下载
  */
-export async function generateShareImage(primary, userLevels, dimOrder, dimDefs, mode) {
+export async function generateShareImage(primary, userLevels, dimOrder, dimDefs, mode, config) {
   const dpr = 2
   const W = 720
   const H = 1280
+  const totalDims = dimOrder.length
+  const appTitle = config?.display?.title || '人格测试'
   const canvas = document.createElement('canvas')
   canvas.width = W * dpr
   canvas.height = H * dpr
   const ctx = canvas.getContext('2d')
   ctx.scale(dpr, dpr)
+  const primaryImage = primary.image || primary.imageUrl || primary.image_url || ''
 
   // 背景
   ctx.fillStyle = '#f0f4f1'
@@ -35,8 +38,7 @@ export async function generateShareImage(primary, userLevels, dimOrder, dimDefs,
   ctx.textAlign = 'center'
   ctx.font = '400 22px system-ui, "PingFang SC", "Microsoft YaHei", sans-serif'
   ctx.fillStyle = '#6b7b6e'
-  const kickerText = mode === 'drunk' ? '隐藏人格已激活' : mode === 'fallback' ? '系统强制兜底' : '你的主类型'
-  ctx.fillText(kickerText, W / 2, y)
+  ctx.fillText('你的主类型', W / 2, y)
   y += 56
 
   // 类型代码
@@ -51,8 +53,21 @@ export async function generateShareImage(primary, userLevels, dimOrder, dimDefs,
   ctx.fillText(primary.cn, W / 2, y)
   y += 36
 
+  if (primaryImage) {
+    try {
+      const image = await loadCanvasImage(primaryImage)
+      const imageSize = 200
+      const imageX = (W - imageSize) / 2
+      const imageY = y
+      drawCoverImage(ctx, image, imageX, imageY, imageSize, imageSize, 2)
+      y += imageSize + 20
+    } catch (error) {
+      console.warn('Failed to load share image:', primaryImage, error)
+    }
+  }
+
   // 匹配度徽章
-  const badgeText = `匹配度 ${primary.similarity}%` + (primary.exact != null ? ` · 精准命中 ${primary.exact}/15 维` : '')
+  const badgeText = `匹配度 ${primary.similarity}%` + (primary.exact != null ? ` · 精准命中 ${primary.exact}/${totalDims} 维` : '')
   ctx.font = '500 20px system-ui, "PingFang SC", "Microsoft YaHei", sans-serif'
   const badgeW = ctx.measureText(badgeText).width + 40
   roundRect(ctx, (W - badgeW) / 2, y - 16, badgeW, 36, 18)
@@ -129,11 +144,11 @@ export async function generateShareImage(primary, userLevels, dimOrder, dimDefs,
   ctx.textAlign = 'center'
   ctx.font = '400 18px system-ui, "PingFang SC", "Microsoft YaHei", sans-serif'
   ctx.fillStyle = '#aab8ac'
-  ctx.fillText('SBTI 人格测试 · 仅供娱乐', W / 2, H - cardY - 24)
+  ctx.fillText(`${appTitle} · 仅供娱乐`, W / 2, H - cardY - 24)
 
   // 下载
   const link = document.createElement('a')
-  link.download = `SBTI-${primary.code}.png`
+  link.download = `${appTitle}-${primary.code}.png`
   link.href = canvas.toDataURL('image/png')
   link.click()
 }
@@ -248,4 +263,29 @@ function wrapText(ctx, text, maxWidth) {
   }
   if (line) lines.push(line)
   return lines
+}
+
+function loadCanvasImage(src) {
+  return new Promise((resolve, reject) => {
+    const image = new Image()
+    image.onload = () => resolve(image)
+    image.onerror = reject
+    image.src = src
+  })
+}
+
+function drawCoverImage(ctx, image, x, y, width, height, radius = 0) {
+  const scale = Math.max(width / image.width, height / image.height)
+  const drawWidth = image.width * scale
+  const drawHeight = image.height * scale
+  const drawX = x + (width - drawWidth) / 2
+  const drawY = y + (height - drawHeight) / 2
+
+  ctx.save()
+  if (radius > 0) {
+    roundRect(ctx, x, y, width, height, radius)
+    ctx.clip()
+  }
+  ctx.drawImage(image, drawX, drawY, drawWidth, drawHeight)
+  ctx.restore()
 }

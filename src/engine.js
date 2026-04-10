@@ -1,12 +1,12 @@
 /**
- * SBTI 评分引擎 — 纯函数，无 DOM 依赖
+ * 评分引擎 — 纯函数，无 DOM 依赖
  */
 
 /**
  * 按维度求和：每维度 2 题，分值相加 (范围 2-6)
  * @param {Object} answers  { q1: 2, q3: 1, ... }
  * @param {Array}  questions 题目定义数组
- * @returns {Object} { S1: 5, S2: 3, ... }
+ * @returns {Object} { B1: 5, B2: 3, ... }
  */
 export function calcDimensionScores(answers, questions) {
   const scores = {}
@@ -19,9 +19,9 @@ export function calcDimensionScores(answers, questions) {
 
 /**
  * 原始分 → L/M/H 等级
- * @param {Object} scores      { S1: 5, ... }
+ * @param {Object} scores      { B1: 5, ... }
  * @param {Object} thresholds  { L: [2,3], M: [4,4], H: [5,6] }
- * @returns {Object} { S1: 'H', S2: 'L', ... }
+ * @returns {Object} { B1: 'H', B2: 'L', ... }
  */
 export function scoresToLevels(scores, thresholds) {
   const levels = {}
@@ -40,7 +40,7 @@ const LEVEL_NUM = { L: 1, M: 2, H: 3 }
 
 /**
  * 解析人格类型的 pattern 字符串
- * "HHH-HMH-MHH-HHH-MHM" → ['H','H','H','H','M','H','M','H','H','H','H','H','M','H','M']
+ * "HHH-HMH-MHH-HHH-HMH" → ['H','H','H','M','H','M','M','H','H','H','H','H','H','M','H']
  */
 export function parsePattern(pattern) {
   return pattern.replace(/-/g, '').split('')
@@ -48,12 +48,13 @@ export function parsePattern(pattern) {
 
 /**
  * 计算用户向量与类型 pattern 的曼哈顿距离
- * @param {Object} userLevels  { S1: 'H', S2: 'L', ... }
- * @param {Array}  dimOrder    ['S1','S2','S3','E1',...]
- * @param {string} pattern     "HHH-HMH-MHH-HHH-MHM"
+ * @param {Object} userLevels  { B1: 'H', B2: 'L', ... }
+ * @param {Array}  dimOrder    ['B1','B2','B3','R1',...]
+ * @param {string} pattern     "HHH-HMH-MHH-HHH-HMH"
+ * @param {number} maxDistance 最大距离
  * @returns {{ distance: number, exact: number, similarity: number }}
  */
-export function matchType(userLevels, dimOrder, pattern) {
+export function matchType(userLevels, dimOrder, pattern, maxDistance) {
   const typeLevels = parsePattern(pattern)
   let distance = 0
   let exact = 0
@@ -66,51 +67,29 @@ export function matchType(userLevels, dimOrder, pattern) {
     if (diff === 0) exact++
   }
 
-  const similarity = Math.max(0, Math.round((1 - distance / 30) * 100))
+  const similarity = Math.max(0, Math.round((1 - distance / maxDistance) * 100))
   return { distance, exact, similarity }
 }
 
 /**
- * 匹配所有类型，排序，应用特殊覆盖
- * @param {Object}  userLevels   { S1: 'H', ... }
- * @param {Array}   dimOrder     维度顺序
+ * 匹配所有标准类型并排序
+ * @param {Object}  userLevels    { B1: 'H', ... }
+ * @param {Array}   dimOrder      维度顺序
  * @param {Array}   standardTypes 标准类型数组
- * @param {Array}   specialTypes  特殊类型数组
- * @param {Object}  options      { isDrunk: boolean }
+ * @param {Object}  options       { maxDistance?: number }
  * @returns {{ primary: Object, secondary: Object|null, rankings: Array, mode: string }}
  */
-export function determineResult(userLevels, dimOrder, standardTypes, specialTypes, options = {}) {
+export function determineResult(userLevels, dimOrder, standardTypes, options = {}) {
+  const maxDistance = options.maxDistance || dimOrder.length * 2
   const rankings = standardTypes.map((type) => ({
     ...type,
-    ...matchType(userLevels, dimOrder, type.pattern),
+    ...matchType(userLevels, dimOrder, type.pattern, maxDistance),
   }))
 
   // 排序：距离升序 → 精准命中降序 → 相似度降序
   rankings.sort((a, b) => a.distance - b.distance || b.exact - a.exact || b.similarity - a.similarity)
 
   const best = rankings[0]
-  const drunk = specialTypes.find((t) => t.code === 'DRUNK')
-  const hhhh = specialTypes.find((t) => t.code === 'HHHH')
-
-  // 酒鬼覆盖
-  if (options.isDrunk && drunk) {
-    return {
-      primary: { ...drunk, similarity: best.similarity, exact: best.exact },
-      secondary: best,
-      rankings,
-      mode: 'drunk',
-    }
-  }
-
-  // 傻乐者兜底
-  if (best.similarity < 60 && hhhh) {
-    return {
-      primary: { ...hhhh, similarity: best.similarity, exact: best.exact },
-      secondary: best,
-      rankings,
-      mode: 'fallback',
-    }
-  }
 
   return {
     primary: best,

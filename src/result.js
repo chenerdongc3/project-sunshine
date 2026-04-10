@@ -8,35 +8,40 @@ const LEVEL_CLASS = { L: 'level-low', M: 'level-mid', H: 'level-high' }
  * 渲染测试结果
  */
 export function renderResult(result, userLevels, dimOrder, dimDefs, config) {
-  const { primary, secondary, rankings, mode } = result
+  const { primary, rankings, mode } = result
+  const totalDims = dimOrder.length
+  const primaryImage = primary.image || primary.imageUrl || primary.image_url || ''
 
   // Kicker
   const kicker = document.getElementById('result-kicker')
-  if (mode === 'drunk') kicker.textContent = '隐藏人格已激活'
-  else if (mode === 'fallback') kicker.textContent = '系统强制兜底'
-  else kicker.textContent = '你的主类型'
+  kicker.textContent = '你的主类型'
 
   // 主类型
   document.getElementById('result-code').textContent = primary.code
   document.getElementById('result-name').textContent = primary.cn
 
+  const resultImageWrap = document.getElementById('result-image-wrap')
+  const resultImage = document.getElementById('result-image')
+  if (primaryImage) {
+    resultImageWrap.style.display = ''
+    resultImage.src = primaryImage
+    resultImage.alt = `${primary.cn} image`
+  } else {
+    resultImageWrap.style.display = 'none'
+    resultImage.removeAttribute('src')
+    resultImage.alt = ''
+  }
+
   // 匹配度
   document.getElementById('result-badge').textContent =
-    `匹配度 ${primary.similarity}%` + (primary.exact != null ? ` · 精准命中 ${primary.exact}/15 维` : '')
+    `匹配度 ${primary.similarity}%` + (primary.exact != null ? ` · 精准命中 ${primary.exact}/${totalDims} 维` : '')
 
   // Intro & 描述
   document.getElementById('result-intro').textContent = primary.intro || ''
   document.getElementById('result-desc').textContent = primary.desc || ''
 
   // 次要匹配
-  const secEl = document.getElementById('result-secondary')
-  if (secondary && (mode === 'drunk' || mode === 'fallback')) {
-    secEl.style.display = ''
-    document.getElementById('secondary-info').textContent =
-      `${secondary.code}（${secondary.cn}）· 匹配度 ${secondary.similarity}%`
-  } else {
-    secEl.style.display = 'none'
-  }
+  document.getElementById('result-secondary').style.display = 'none'
 
   // 雷达图
   const canvas = document.getElementById('radar-chart')
@@ -79,13 +84,12 @@ export function renderResult(result, userLevels, dimOrder, dimDefs, config) {
   })
 
   // 免责声明
-  document.getElementById('disclaimer').textContent =
-    mode === 'normal' ? config.display.funNote : config.display.funNoteSpecial
+  document.getElementById('disclaimer').textContent = config.display.funNote || ''
 
   // 下载分享图
   const btnDownload = document.getElementById('btn-download')
   btnDownload.onclick = () => {
-    generateShareImage(primary, userLevels, dimOrder, dimDefs, mode)
+    generateShareImage(primary, userLevels, dimOrder, dimDefs, mode, config)
   }
 
   // 复制 AI Agent 命令
